@@ -1,0 +1,163 @@
+<!doctype>
+<html>
+<head>
+<link rel="stylesheet" href="styl.css" type="text/css" />
+<script>
+function isDate(txtDate, separator) {
+    var aoDate,           
+        ms,              
+        month, day, year; 
+
+    if (separator === undefined) {
+        separator = '/';
+    }
+    aoDate = txtDate.split(separator);
+    if (aoDate.length !== 3) {
+        return false;
+    }
+    month = aoDate[0] - 1; 
+    day = aoDate[1] - 0;
+    year = aoDate[2] - 0;
+    if (year < 1000 || year > 3000) {
+        return false;
+    }
+    ms = (new Date(year, month, day)).getTime();
+    aoDate = new Date();
+    aoDate.setTime(ms);
+    if (aoDate.getFullYear() !== year ||
+        aoDate.getMonth() !== month ||
+        aoDate.getDate() !== day) {
+        return false;
+    }
+    return true;
+}
+
+
+function validateMyForm(){
+    
+    var fname = document.forms["form1"]["firstname"].value;
+    var lname = document.forms["form1"]["lastname"].value;
+    var eml = document.forms["form1"]["email"].value;
+    var q = document.forms["form1"]["quantity"].value;
+    if (fname == null || fname == ""){
+    document.getElementById("fnm").innerHTML = "First Name is missing."
+      
+}
+   else {
+    document.getElementById("fnm").innerHTML = ""
+}
+    if (lname == null || lname == ""){
+    document.getElementById("lnm").innerHTML = "Last Name is missing."
+      
+}
+   else {
+    document.getElementById("lnm").innerHTML = ""
+}
+    if (eml == null || eml == ""){
+    document.getElementById("ema").innerHTML = "Email is missing."
+      
+}
+   else {
+    document.getElementById("ema").innerHTML = ""
+}
+    if (q<1 || q>50){
+    document.getElementById("quan").innerHTML = "Invalid Input - Range is (1-50)"
+      
+}
+   else {
+    document.getElementById("quan").innerHTML = ""
+}
+
+
+    var fro = document.forms["form1"]["fromm"].value;
+   
+    if (isDate(fro)) {
+        document.getElementById("fr").innerHTML = ""
+    }
+    else {
+        document.getElementById("fr").innerHTML = "Invalid Date Format - MM/DD/YY"
+    }
+
+    var tooo = document.forms["form1"]["too"].value;
+   
+    if (isDate(tooo)) {
+        document.getElementById("te").innerHTML = ""
+    }
+    else {
+        document.getElementById("te").innerHTML = "Invalid Date Format - MM/DD/YY"
+    }
+
+
+    var de = document.forms["form1"]["dep"].value;
+   
+    if (isDate(de)) {
+        document.getElementById("dd").innerHTML = ""
+    }
+    else {
+        document.getElementById("dd").innerHTML = "Invalid Date Format - MM/DD/YY"
+    }
+
+
+    var rrr = document.forms["form1"]["ret"].value;
+   
+    if (isDate(de)) {
+        document.getElementById("rr").innerHTML = ""
+    }
+    else {
+        document.getElementById("rr").innerHTML = "Invalid Date Format - MM/DD/YY"
+    }
+
+
+
+ return false;
+  
+}
+
+</script>
+</head>
+<body>
+<form name="form1" action="#" onsubmit="return validateMyForm()" method="post">
+  <fieldset>
+    <legend>Registration Form:</legend>
+    First name:<br>
+    <input type="text" name="firstname" id="fn">
+    <p id="fnm"></p>
+
+
+<br>
+    Last name:<br>
+    <input type="text" name="lastname" id="ln">
+    <p id="lnm"></p>
+
+    <br>
+  E-mail:<br>
+  <input type="email" name="email" value="">
+  <p id="ema"></p>
+  <br>Number of passengers</br>
+  <input type="number" name="quantity" value="0">
+    <p id="quan"></p>
+<br>
+  Specifics:<br>
+  <input type="checkbox" name="pool" value="pool"> Swiming pool
+<input type="checkbox" name="internet" value="wifi"> Internet access
+<input type="checkbox" name="Transport" value="car"> Transport
+<br>Package type: 
+<br><input type="radio" name="flight only" value="yes" checked>Flight only
+<br>
+<input type="radio" name="Flight and hotel" value="yes"> Flight and hotel
+<p class="style1"> 
+
+Flight:<br>   From <input type="text" name="fromm" placeholder="mm/dd/yyyy"/> To <input type="text" name="too" placeholder="mm/dd/yyyy"></p>
+<p id="fr"></p> <p id="te"></p>
+
+<p>Depart <input type="text" name="dep" placeholder="mm/dd/yyyy">Return<input type="text" name="ret" placeholder="mm/dd/yyyy">
+<p id="dd"></p> <p id="rr"></p>
+<br> Comment:<br>
+  <textarea name='comment' id='comment'></textarea><br></br>
+  <button value="Submit" type="submit">Submit</button>
+  <button type="reset" value="Reset">Reset</button>
+  </fieldset>
+  </form>
+  </body>
+  </html>
+
